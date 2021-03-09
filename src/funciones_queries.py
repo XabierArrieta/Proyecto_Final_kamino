@@ -7,7 +7,7 @@ import requests
 import json
 
 
-from mongoConnection import *
+from src.mongoConnection import *
 
 
 
@@ -70,6 +70,7 @@ def mapa (coleccion):
         coordenadas = list(cada_entrada.values())
         lat = coordenadas[0].split(",")[0][1:]
         lon = coordenadas[0].split(",")[1][:-1]
+        
                          
         loc = {"location":[lat,lon],
           "tooltip": f"{coleccion}"}
