@@ -1,5 +1,5 @@
 
-[Kamino](images/Kamino_logo.png)
+![Kamino](images/Kamino_logo.png)
 
 # Kamino
 
