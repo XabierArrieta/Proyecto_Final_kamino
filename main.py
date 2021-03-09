@@ -7,6 +7,8 @@ from PIL import Image
 import folium
 #import codecs
 from streamlit_folium import folium_static
+from folium import Choropleth, Circle, Marker, Icon, Map
+
 #import streamlit.components.v1 as components
 
 imagen = Image.open("images/kamino1.jpg")
@@ -19,9 +21,9 @@ st.write("""
 """
 )
 
-localidad = st.selectbox(
+pueblo = st.selectbox(
     " ¿En qué localidad se encuentra?", dat.lista_localidades())
-st.write("Opción seleccionada:", localidad)
+st.write("Opción seleccionada:", pueblo)
 
 
 eleccion = st.radio("¿Qué es lo que está buscando?", ("Alojamiento", "Restauración", "Puntos de interés"))
@@ -33,16 +35,11 @@ else:
     st.warning("Ha seleccionado: Puntos de interés")
 
 
-mapa_prueba = folium.Map(location = [42.81716975039481, -1.6428906656590594], zoom_start = 20)
-folium_static(mapa_prueba)
+#las dos variables son: localidad y eleccion
 
 
-mapa_prueba7 = folium.Map(location = [42.81716975039481, -1.6428906656590594], zoom_start = 15)
-folium_static(mapa_prueba7)
+folium_static(dat.mapa(pueblo, eleccion))
 
-
-mapa_prueba8 = folium.Map(location = [42.81716975039481, -1.6428906656590594], zoom_start = 15)
-folium_static(mapa_prueba8)
 
 #nombre, punto_inicio = dat.localidad()
         

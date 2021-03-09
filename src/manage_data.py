@@ -1,17 +1,24 @@
 import pandas as pd
+import folium
+from src.mongoConnection import *
 
+from folium import Choropleth, Circle, Marker, Icon, Map
+from geopy.geocoders import Nominatim
+
+import requests
+import json
 
 def carga_data():
-    data = pd.read_csv('data/kamino_aloj_final.csv')
-    #rest = pd.read_csv('data/kamino_rest_final.csv')
-    #patr = pd.read_csv('data/kamino_patr_final.csv')
-    return data #rest, #patr
+    aloj = pd.read_csv('data/kamino_aloj_final.csv')
+    rest = pd.read_csv('data/kamino_rest_final.csv')
+    patr = pd.read_csv('data/kamino_patr_final.csv')
+    return aloj
 
 def lista_localidades():
     data = carga_data()
     return list(data.LOCALIDAD.unique())
 
-def localidad():
+def localidad(localidad):
     
     """
     La función recibe un input del usuario; la localización en la que se encuentra y a través de Geocoder
@@ -22,7 +29,7 @@ def localidad():
     
     """
     
-    localidad = (input("Localidad: ")).upper() #Convierte el input en mayúsculas para que es´te igual que en la BBDD.
+    #localidad = (input("Localidad: ")).upper() #Convierte el input en mayúsculas para que es´te igual que en la BBDD.
     
     locator = Nominatim(user_agent = "myGeocoder")
     location = locator.geocode(localidad)
@@ -47,8 +54,29 @@ def locali_colec_coord(coleccion, *lugar):
     coordenadas = list(bbdd.find(query,{"_id":0,"COORDENADAS":1}))
     return coordenadas
 
+def markers(coleccion):
+    
+        if coleccion == "Alojamiento":
+            icono = Icon(color = "blue",
+                    prefix = "fa",
+                    icon = "hotel",
+                    icon_color = "black")
+            
+        elif coleccion == "Patrimonio":   
+            icono = Icon(color = "orange",
+                    prefix = "fa",
+                    icon = "camera",
+                    icon_color = "black")
+            
+        else:
+            icono = Icon(color = "green",
+                    prefix = "fa",
+                    icon = "spoon",
+                    icon_color = "black")
 
-def mapa (coleccion):
+        return icono
+
+def mapa (pueblo, coleccion):
     
     """
     Función creada para mostrar en un mapa la información relacionada con cada colección dependiendo de la localidad
@@ -59,11 +87,11 @@ def mapa (coleccion):
     
     """
     
-    nombre, punto_inicio = localidad() #Devuelve el nombre de la localidad y las coordenadas
+    #nombre, punto_inicio = localidad() #Devuelve el nombre de la localidad y las coordenadas
     
-    query = locali_colec_coord(coleccion, nombre) #Hace una query con el nombre de la localidad
+    query = locali_colec_coord(coleccion, pueblo) #Hace una query con el nombre de la localidad
     
-    mapa = folium.Map(location = punto_inicio, zoom_start=15) #Devuelve un mapa con las coordenadas
+    mapa = folium.Map(location = localidad(pueblo)[1], zoom_start=15) #Devuelve un mapa con las coordenadas
     
 
     for cada_entrada in query:
@@ -79,28 +107,5 @@ def mapa (coleccion):
     
     return mapa
 
-"""
-    def markers(coleccion):
-    
 
     
-    if coleccion == "Alojamiento":
-        icono = Icon(color = "blue",
-                prefix = "fa",
-                icon = "hotel",
-                icon_color = "black")
-        
-    elif coleccion == "Patrimonio":   
-        icono = Icon(color = "orange",
-                prefix = "fa",
-                icon = "camera",
-                icon_color = "black")
-        
-    else:
-        icono = Icon(color = "green",
-                prefix = "fa",
-                icon = "spoon",
-                icon_color = "black")
-
-    return icono
-    """
