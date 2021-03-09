@@ -3,7 +3,7 @@
 
 # Kamino
 
-Proyecto final del Bootcamp Data Analytics de [Ironhack Madrid](https://www.ironhack.com/es)).
+Proyecto final del Bootcamp Data Analytics de [Ironhack Madrid](https://www.ironhack.com/es).
 
 ## Contexto
 
@@ -38,7 +38,12 @@ Kamino, ofrece de una manera fácil y visual, respuestas a sus necesidades;
 
 ¿Qué ver?
 
+
 ## ¿Cómo funciona?
+
+### Instalaciones necesarias
+
+    pip install -r requirements.txt
 
 Enlace
 
