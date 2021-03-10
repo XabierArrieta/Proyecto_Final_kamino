@@ -3,7 +3,7 @@ import src.manage_data as dat
 from PIL import Image
 #import src.manage_data as dat
 #import plotly.express as px
-#import pandas as pd
+import pandas as pd
 import folium
 #import codecs
 from streamlit_folium import folium_static
@@ -26,32 +26,38 @@ pueblo = st.selectbox(
 st.write("Opción seleccionada:", pueblo)
 
 
-eleccion = st.radio("¿Qué es lo que está buscando?", ("Alojamiento", "Restauración", "Puntos de interés"))
-if eleccion == "Alojamiento":
+coleccion = st.radio("¿Qué es lo que está buscando?", ("Alojamiento", "Restauracion", "Patrimonio"))
+if coleccion == "Alojamiento":
     st.info("Ha seleccionado: Alojamiento")
-elif eleccion == "Restauración":
+elif coleccion == "Restauracion":
     st.success("Ha seleccionado: Restauración")
 else:
-    st.warning("Ha seleccionado: Puntos de interés")
+    st.warning("Ha seleccionado: Patrimonio")
 
+
+#pueblo = st.selectbox(
+#    " ¿Qúe es lo que está busncando?", dat.lista_localidades())
+#st.write("Opción seleccionada:", pueblo)
 
 #las dos variables son: localidad y eleccion
 
 
-folium_static(dat.mapa(pueblo, eleccion))
+st.write("""
+#### En el siguiente mapa se muestran todas las opciones:
+
+"""
+)
 
 
-#nombre, punto_inicio = dat.localidad()
-        
-#query = dat.locali_colec_coord(coleccion, nombre)
-                                
-#mapassss = folium.Map(location = punto_inicio, zoom_start=15)
-#folium_static(mapassss)
+folium_static(dat.mapa(pueblo, coleccion))
 
 
+st.write("""
+#### En la siguiente tabla se muestran listadas, en detalle, todas las opciones:
 
-
-datos = dat.carga_data()
+"""
+)
+datos = dat.carga_data(coleccion)
 st.dataframe(datos)
 
 

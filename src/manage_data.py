@@ -8,14 +8,17 @@ from geopy.geocoders import Nominatim
 import requests
 import json
 
-def carga_data():
-    aloj = pd.read_csv('data/kamino_aloj_final.csv')
-    rest = pd.read_csv('data/kamino_rest_final.csv')
-    patr = pd.read_csv('data/kamino_patr_final.csv')
-    return aloj
+def carga_data(item): #carga dataset por colección
+    if item == "Alojamiento":
+        data = pd.read_csv('data/kamino_aloj_final.csv')
+    elif item == "Restauracion":
+        data = pd.read_csv('data/kamino_rest_final.csv')
+    else:
+        data = pd.read_csv('data/kamino_patr_final.csv')
+    return data
 
 def lista_localidades():
-    data = carga_data()
+    data = carga_data("aloj")
     return list(data.LOCALIDAD.unique())
 
 def localidad(localidad):
@@ -51,8 +54,9 @@ def locali_colec_coord(coleccion, *lugar):
     """
     bbdd = db[f'{coleccion}']
     query = {"LOCALIDAD":f"{lugar[0]}"}
-    coordenadas = list(bbdd.find(query,{"_id":0,"COORDENADAS":1}))
-    return coordenadas
+    coordenadas = bbdd.find(query,{"_id":0,"COORDENADAS":1,"NOMBRE":1})
+    df = pd.DataFrame(coordenadas)
+    return df
 
 def markers(coleccion):
     
@@ -94,17 +98,26 @@ def mapa (pueblo, coleccion):
     mapa = folium.Map(location = localidad(pueblo)[1], zoom_start=15) #Devuelve un mapa con las coordenadas
     
 
-    for cada_entrada in query:
-        coordenadas = list(cada_entrada.values())
-        lat = coordenadas[0].split(",")[0][1:]
-        lon = coordenadas[0].split(",")[1][:-1]
-                         
-        loc = {"location":[lat,lon],
-          "tooltip": f"{coleccion}"}
+#for cada_entrada in query: #query is the df
 
-        marker_of = Marker(**loc, icon = markers(coleccion) , popup=f"{coleccion}")
+    #coordenadas = dfcada_entrada.values())
+    #lat = coordenadas[0].split(",")[0][1:]
+    #lon = coordenadas[0].split(",")[1][:-1]
+
+
+    for x, y in query.iterrows():
+ 
+        
+        lat = y['COORDENADAS'].split(",")[0][1:]
+        lon = y['COORDENADAS'].split(",")[1][:-1]
+        nombre = y['NOMBRE']
+
+        loc = {"location":[lat,lon],
+            "tooltip": f"{nombre}"}
+
+        marker_of = Marker(**loc, icon = markers(coleccion) , popup=f"Clique aquí para más información")
         marker_of.add_to(mapa)
-    
+
     return mapa
 
 
