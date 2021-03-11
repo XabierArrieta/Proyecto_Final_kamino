@@ -49,15 +49,18 @@ Finalmente se muestra un mapa con los puntos.
 
 ![Kamino_Streamlit](images/ejemplokamino.png)
 
+La app está creada en Streamlit.
 
 ### Instalaciones necesarias
 
     pip install -r requirements.txt
 
+### Referencias
 
-
-
-
+- Geoocoder
+- Google Maps Api
+- MongoDB
+- Streamlit
 
 
 
