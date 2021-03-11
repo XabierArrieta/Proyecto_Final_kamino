@@ -8,7 +8,7 @@ import folium
 #import codecs
 from streamlit_folium import folium_static
 from folium import Choropleth, Circle, Marker, Icon, Map
-
+import webbrowser
 #import streamlit.components.v1 as components
 
 imagen = Image.open("images/kamino1.jpg")
@@ -35,9 +35,7 @@ else:
     st.warning("Ha seleccionado: Patrimonio")
 
 
-#pueblo = st.selectbox(
-#    " ¿Qúe es lo que está busncando?", dat.lista_localidades())
-#st.write("Opción seleccionada:", pueblo)
+
 
 #las dos variables son: localidad y eleccion
 
@@ -45,6 +43,8 @@ else:
 st.write("""
 #### En el siguiente mapa se muestran todas las opciones:
 
+Clikando sobre el punto que le interese, obtendrá un número que
+podrá buscarlo en la lista
 """
 )
 
@@ -52,13 +52,24 @@ st.write("""
 folium_static(dat.mapa(pueblo, coleccion))
 
 
-st.write("""
-#### En la siguiente tabla se muestran listadas, en detalle, todas las opciones:
+st.header("""
+Introduzca el código que que quiera buscar
+""")
+texto = st.text_input("Código: ")
 
-"""
-)
-datos = dat.carga_data(coleccion)
-st.dataframe(datos)
+if st.button("Aceptar"):
+    st.write("Buscando resultados")
+
+    st.write("""
+    #### En la siguiente tabla se muestran listadas, en detalle, todas las opciones:
+
+    """
+    )
+    datos = dat.filtro(coleccion, texto)
+
+    st.dataframe(datos)
+
+
 
 
 st.sidebar.header("Sobre Kamino")
@@ -68,8 +79,14 @@ st.sidebar.write(
 Kamino es mi proyecto final del 
 Bootcamp de Data Analytics de Ironhack 
 en Madrid
+"""
+)
 
-Para cualquier consulta sobre el 
+st.sidebar.header("Contacto")
+
+st.sidebar.write(
+
+"""Para cualquier consulta sobre el 
 proyecto, escríbeme a la siguiente
 dirección:
 
@@ -79,3 +96,9 @@ dirección:
 
 add_imagen = imagen = Image.open("images/qr.png")
 st.sidebar.image(imagen)
+
+
+url = 'https://github.com/XabierArrieta/Proyecto_Final_kamino'
+
+if st.sidebar.button('Proyecto Kamino'):
+    webbrowser.open_new_tab(url)
