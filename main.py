@@ -16,7 +16,7 @@ st.image(imagen)
 
 st.write("""
 # ¡Bienvenido/a a Kamino!
-### Le ayudamos a encontrar lo que necesite durante el Kamino.
+### ¿Necesita ayuda?
 
 """
 )
@@ -63,16 +63,19 @@ st.dataframe(datos)
 
 st.sidebar.header("Sobre Kamino")
 
-st.sidebar.text(
-"""Kamino es mi proyecto final del 
+st.sidebar.write(
+"""
+Kamino es mi proyecto final del 
 Bootcamp de Data Analytics de Ironhack 
 en Madrid
 
 Para cualquier consulta sobre el 
 proyecto, escríbeme a la siguiente
 dirección:
-xabier.arrieta@kamino.es"""
+
+**xabier.arrieta@kamino.es**"""
 )
 
 
-
+add_imagen = imagen = Image.open("images/qr.png")
+st.sidebar.image(imagen)

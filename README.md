@@ -21,9 +21,9 @@ En la actualidad, existen también otras razones:
 - Superación personal
 - Disfrutar de su patrimonio cultural 
 
-Según datos de la [Oficina de acogida al Peregrino](https://oficinadelperegrino.com/);
+Según datos de la [Observatorio Turístico de Navarra](https://www.turismo.navarra.es/esp/profesionales/Observatorio-turistico/presentacion/presentacion);
 
-- En **2019**, el **23%** de los/as peregrinos/as tenían **más de 60 años.**	
+- En **2019**, el **20** de los/as peregrinos/as tenían **más de 60 años.**	
 
 
 ## ¿Qué es Kamino?
@@ -41,11 +41,20 @@ Kamino, ofrece de una manera fácil y visual, respuestas a sus necesidades;
 
 ## ¿Cómo funciona?
 
+El peregrino confirma en la localidad en la que se encuentra.
+
+Seguidamente, confirma qué es lo que está buscando.
+
+Finalmente se muestra un mapa con los puntos.
+
+![Kamino_Streamlit](images/ejemplokamino.png)
+
+
 ### Instalaciones necesarias
 
     pip install -r requirements.txt
 
-Enlace
+
 
 
 
