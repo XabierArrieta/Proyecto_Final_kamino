@@ -45,7 +45,7 @@ def locali_colec_coord(coleccion, *lugar):
     
     """
     La función recibe una colección y un lugar; hace una query a la colección seleccionada y el lugar
-    especifivado y devuelve las coordenadas de los lugares encontrados.
+    especifivado y devuelve las coordenadas de los lugares encontrados en un dataframe.
    
     
     Input: Nombre de la colección y localidad
@@ -59,26 +59,31 @@ def locali_colec_coord(coleccion, *lugar):
     return df
 
 def markers(coleccion):
-    
-        if coleccion == "Alojamiento":
-            icono = Icon(color = "blue",
-                    prefix = "fa",
-                    icon = "hotel",
-                    icon_color = "black")
-            
-        elif coleccion == "Patrimonio":   
-            icono = Icon(color = "orange",
-                    prefix = "fa",
-                    icon = "camera",
-                    icon_color = "black")
-            
-        else:
-            icono = Icon(color = "green",
-                    prefix = "fa",
-                    icon = "spoon",
-                    icon_color = "black")
 
-        return icono
+    """
+    Función de markers creada para crear a cada colección unos iconos.
+
+    """
+    
+    if coleccion == "Alojamiento":
+        icono = Icon(color = "blue",
+                prefix = "fa",
+                icon = "hotel",
+                icon_color = "black")
+        
+    elif coleccion == "Patrimonio":   
+        icono = Icon(color = "orange",
+                prefix = "fa",
+                icon = "camera",
+                icon_color = "black")
+        
+    else:
+        icono = Icon(color = "green",
+                prefix = "fa",
+                icon = "spoon",
+                icon_color = "black")
+
+    return icono
 
 def mapa (pueblo, coleccion):
     

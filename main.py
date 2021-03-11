@@ -61,5 +61,18 @@ datos = dat.carga_data(coleccion)
 st.dataframe(datos)
 
 
+st.sidebar.header("Sobre Kamino")
+
+st.sidebar.text(
+"""Kamino es mi proyecto final del 
+Bootcamp de Data Analytics de Ironhack 
+en Madrid
+
+Para cualquier consulta sobre el 
+proyecto, escríbeme a la siguiente
+dirección:
+xabier.arrieta@kamino.es"""
+)
+
 
 
