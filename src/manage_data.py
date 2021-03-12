@@ -30,7 +30,7 @@ def lista_localidades():
 def localidad(localidad):
     
     """
-    La función recibe un input del usuario; la localización en la que se encuentra y a través de Geocoder
+    La función recibe una localidad y a través de Geocoder
     devuelve el nombre de la localidad y las coordenadas.
     
     Input: Nombre de la localidad
@@ -109,33 +109,58 @@ def mapa (pueblo, coleccion):
     mapa = folium.Map(location = localidad(pueblo)[1], zoom_start=15) #Devuelve un mapa con las coordenadas
     
 
-
-
-
     for x, y in query.iterrows():
- 
-        
-        lat = y['COORDENADAS'].split(",")[0][1:]
-        lon = y['COORDENADAS'].split(",")[1][:-1]
-        nombre = y['NOMBRE']
-        num = y['CÓDIGO']
 
-        loc = {"location":[lat,lon],
-            "tooltip": f"{nombre}"}
+        if coleccion == "Patrimonio":
+        
+            lat = y['COORDENADAS'].split(",")[0][1:]
+            lon = y['COORDENADAS'].split(",")[1][:-1]
+            nombre = y['NOMBRE']
+            num = y['CÓDIGO']
+
+            loc = {"location":[lat,lon],
+                "tooltip": f"{nombre}"}
 
         
-        marker_of = Marker(**loc, icon = markers(coleccion) , popup=f"{num}")
-        marker_of.add_to(mapa)
+            marker_of = Marker(**loc, icon = markers(coleccion) , popup=f"{nombre}")
+            marker_of.add_to(mapa)
+        
+        else:
+        
+
+            lat = y['COORDENADAS'].split(",")[0][1:]
+            lon = y['COORDENADAS'].split(",")[1][:-1]
+            nombre = y['NOMBRE']
+            num = y['CÓDIGO']
+
+            loc = {"location":[lat,lon],
+                "tooltip": f"{nombre}"}
+
+        
+            marker_of = Marker(**loc, icon = markers(coleccion) , popup=f"{num}")
+            marker_of.add_to(mapa)
 
     return mapa
 
 
-def filtro(item, numero): #carga dataset por colección
-    if item == "Alojamiento":
-        data = pd.read_csv('data/kamino_aloj_final.csv')
-    elif item == "Restauracion":
-        data = pd.read_csv('data/kamino_rest_final.csv')
-    else:
+
+
+
+
+
+
+def filtro(item, valor): #carga dataset por colección
+    try:
+        if item == "Alojamiento":
+            data = pd.read_csv('data/kamino_aloj_final.csv')
+        elif item == "Restauracion":
+            data = pd.read_csv('data/kamino_rest_final.csv')
+
+        return data[data["CÓDIGO"] == valor]
+
+    except: 
         data = pd.read_csv('data/kamino_patr_final.csv')
-    #return data
-    return data[data["CÓDIGO"] == numero]
+
+        return data[data["NOMBRE"] == valor]
+
+

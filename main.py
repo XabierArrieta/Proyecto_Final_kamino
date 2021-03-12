@@ -16,7 +16,7 @@ st.image(imagen)
 
 st.write("""
 # ¡Bienvenido/a a Kamino!
-### ¿Necesita ayuda?
+
 
 """
 )
@@ -43,8 +43,7 @@ else:
 st.write("""
 #### En el siguiente mapa se muestran todas las opciones:
 
-Clikando sobre el punto que le interese, obtendrá un número que
-podrá buscarlo en la lista
+Clikando sobre el punto que le interese, obtendrá un código o nombre.
 """
 )
 
@@ -52,8 +51,9 @@ podrá buscarlo en la lista
 folium_static(dat.mapa(pueblo, coleccion))
 
 
-st.header("""
-Introduzca el código que que quiera buscar
+st.write("""
+#### Introduzca el código o nombre que ha obtenido en el mapa para mostrar información detallada de ese punto:
+
 """)
 texto = st.text_input("Código: ")
 
