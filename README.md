@@ -47,20 +47,32 @@ Seguidamente, confirma qué es lo que está buscando.
 
 Finalmente se muestra un mapa con los puntos.
 
-![Kamino_Streamlit](images/ejemplokamino.png)
+![Proceso](images/proceso.png)
+
+## Demo
 
 La app está creada en Streamlit.
 
-### Instalaciones necesarias
+![Kamino_Streamlit](images/ejemplokamino.png)
+
+## Estructura del repositorio
+
+- *data*: Datasets limpios
+- *images*: Imágenes
+- *input*: Datasets originales
+- *notebooks*: jupyters donde realizo la limpieza, queries a mongo o pruebas para streamlit.
+- *src*: archivos .py
+
+## Instalaciones necesarias
 
     pip install -r requirements.txt
 
-### Referencias
+## Referencias
 
-- Geoocoder
-- Google Maps Api
-- MongoDB
-- Streamlit
+- [Geopy](https://pypi.org/project/geopy/)
+- [Google Maps API](https://developers.google.com/maps?hl=es)
+- [MongoDB](https://www.mongodb.com/es)
+- [Streamlit](https://streamlit.io/)
 
 
 
